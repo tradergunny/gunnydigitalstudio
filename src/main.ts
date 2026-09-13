@@ -11,6 +11,7 @@ import {
   work,
   type Channel,
 } from './content';
+import { mountStudio } from './studio';
 
 const app = document.querySelector<HTMLDivElement>('#app')!;
 
@@ -75,7 +76,7 @@ app.innerHTML = `
           </div>
           <p class="stage-caption caps">
             <span>${escape(site.poster.caption)}</span>
-            <span>${escape(site.poster.state)}</span>
+            <span class="stage-state"></span>
           </p>
         </div>
       </div>
@@ -161,6 +162,13 @@ app.innerHTML = `
     <p class="colophon-mark">${escape(site.wordmark)} — ${escape(site.location)}</p>
   </footer>
 `;
+
+/** The studio: poster now, the live scene faded in over it once the hero has painted. */
+mountStudio({
+  hero: app.querySelector<HTMLElement>('.hero')!,
+  stage: app.querySelector<HTMLElement>('.stage')!,
+  caption: app.querySelector<HTMLElement>('.stage-state')!,
+});
 
 /** Underline the nav item for whatever section is crossing the middle of the viewport. */
 const navLinks = [...app.querySelectorAll<HTMLAnchorElement>('.nav a[data-section]')];

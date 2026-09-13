@@ -132,3 +132,16 @@ See `docs/3d-feasibility.md`. The real GLB works in the hero slot with hotspots 
 **Decision:** a channel with no URL is left out of the page rather than shown as greyed-out text. The entry stays in `channels` with `href: null`; giving it a URL is the only step needed to make it appear, in both the hero footer and Contact. The Creator facet therefore carries its body copy and no link for now.
 
 **Why:** a dead "YOUTUBE" and "RÉSUMÉ" in a link list read as broken rather than as forthcoming, and the footer note already tells a visitor that entries are still samples.
+
+## 2026-09-14 — Live scene loads progressively over the Poster
+
+**Decision:** The Studio component (`src/studio.ts`) owns the state machine `poster → loading → live | failed` and exposes the read-only `window.__gunny` diagnostics (`state()`, `target()`, `stats()`). Loading begins once the page has loaded and painted and the Hero is intersecting the viewport; only then are the renderer chunk, the Three chunk and the model fetched, so the initial script stays at 13 kB. The caption's state word reads `Still render`, then `Loading 3D 42%` as the model arrives, then `Live 3D — drag to look around`. On success the canvas fades in over the Poster in 0.6 s, and the Poster steps aside once the canvas is fully in, so the room is never thinner than the Poster mid-fade (instant with reduced motion). Leaving live has no transition, so a context loss never shows an empty slot. No WebGL 2, a load error, or a context lost later all enter `failed`, which disposes the renderer, removes the canvas and reads exactly like `poster`. `held` is declared and not yet entered.
+
+**Renderer trimmed and renamed** (`src/render/studio.ts` → `src/render/live-scene.ts`, class `LiveScene`, the glossary's term): orthographic camera, orbit within the existing azimuth and polar limits, `focus`, `reset`, `current`, `moving`, `project`, hover cursor, `stats`, context-loss handling, `dispose`. Moods, the light slider, ambient audio, snapshot (and `preserveDrawingBuffer`), the drawer, chair pivot, fan blades, per-object material toggles and click-to-select are gone. Lighting is fixed to the values the day mood produced at light 80 with the blind half down, the room's old defaults, so the scene reads as it did. The object table comes from the hotspots in `src/content.ts`, so a position lives in one place.
+
+**Framing:** the Poster is a Blender render; the live camera keeps its angle and target and opens at zoom 0.83, fitted by least squares so the three hotspot objects project to within 1.5 % of their Poster positions. The Poster's grey ground still differs from the page ground during the crossfade; re-rendering the Poster on the page ground is a later ticket.
+
+**WebGL is probed before Three is imported** (`canvas.getContext('webgl2')`), so a browser without it never downloads the chunk and never logs the error Three prints when a context cannot be created.
+
+**Test seam:** `tests/studio.spec.ts` drives the three cases (normal, model blocked, WebGL disabled) plus context loss, lazy loading with the Hero off screen, reduced motion and the read-only diagnostics, in both viewports. Playwright reuses whatever is already on its port, so `PORT=…` now overrides it for worktrees that run side by side, and `.claude/launch.json` gained a `dev-alt` entry on 5174 for the same reason.
+

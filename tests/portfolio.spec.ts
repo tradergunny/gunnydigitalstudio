@@ -1,24 +1,18 @@
-import { expect, test, type Page } from '@playwright/test';
+import { expect, test } from '@playwright/test';
 import { channels, experience, facets, hasPlaceholders, sections, site, work } from '../src/content';
+import { watchConsole, withoutWebGL } from './helpers';
 
-/** Collects anything the page shouts about, so every test can end on a clean console. */
-const watchConsole = (page: Page) => {
-  const problems: string[] = [];
-  page.on('console', message => {
-    if (message.type() === 'error') problems.push(message.text());
-  });
-  page.on('pageerror', error => problems.push(String(error)));
-  return problems;
-};
-
+/* These tests are about the page around the studio, so they run without WebGL and the
+   studio stays on the poster; the live scene has its own spec. */
 test.beforeEach(async ({ page }) => {
+  await withoutWebGL(page);
   await page.goto('/');
 });
 
 test('the hero shows the poster, the name and the contact link above the fold', async ({
   page,
 }, testInfo) => {
-  const poster = page.getByRole('img', { name: /GunnyTrader studio/i });
+  const poster = page.getByRole('img', { name: site.poster.alt });
   await expect(poster).toBeVisible();
 
   await expect(page.getByRole('heading', { level: 1 })).toHaveText(site.wordmark);
@@ -133,7 +127,7 @@ test('nothing from the interactive room is left in the page', async ({ page }) =
       return stray;
     })(),
     stored: Object.keys(localStorage),
-    media: document.querySelectorAll('audio, video, canvas, dialog').length,
+    media: document.querySelectorAll('audio, video, dialog').length,
     diagnostics: '__studio' in window,
   }));
 
@@ -147,7 +141,7 @@ test('the hero splits on the desktop and stacks on a phone', async ({ page }) =>
   const width = page.viewportSize()!.width;
   const monogram = (await page.locator('.monogram').boundingBox())!;
   const name = (await page.getByRole('heading', { level: 1 }).boundingBox())!;
-  const poster = (await page.getByRole('img', { name: /GunnyTrader studio/i }).boundingBox())!;
+  const poster = (await page.getByRole('img', { name: site.poster.alt }).boundingBox())!;
 
   expect(monogram.y, 'the header sits above the name column').toBeLessThan(name.y);
 

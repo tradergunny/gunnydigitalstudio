@@ -12,7 +12,7 @@ export type SectionId = 'work' | 'experience' | 'about' | 'contact';
 /** The three sides of the identity presented in About. */
 export type FacetId = 'developer' | 'trader' | 'creator';
 
-/** The studio objects a hotspot can sit on. A subset of the renderer's object ids. */
+/** The studio objects a hotspot sits on; the live scene focuses on these and nothing else. */
 export type HotspotId = 'workstation' | 'laptop' | 'camera';
 
 export interface Placeholder {
@@ -87,8 +87,17 @@ export const site = {
   poster: {
     alt: 'A 3D render of the GunnyTrader studio in Bangkok: a corner desk with a chart monitor, a code display and a laptop, a camera in a glass case, and the GunnyTrader wall behind.',
     caption: 'The studio — Bangkok',
-    /** Names what the slot is currently showing. Becomes "Live 3D" once the scene loads. */
-    state: 'Still render',
+  },
+  /** What the caption says the slot is showing, one line per Studio state a visitor can see. */
+  studio: {
+    /** The Poster, before the Live scene loads and whenever it cannot. */
+    still: 'Still render',
+    /** While the model downloads. The page appends the percentage. */
+    loading: 'Loading 3D',
+    /** The Live scene. */
+    live: 'Live 3D — drag to look around',
+    /** The description the canvas carries for screen readers. */
+    alt: 'A live 3D model of the GunnyTrader studio. Drag to look around.',
   },
   /** Shown once, in the page footer, while any entry is flagged placeholder. */
   placeholderNote: 'Sample entries shown — work, experience and links are placeholders.',
