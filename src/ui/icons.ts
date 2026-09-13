@@ -1,0 +1,21 @@
+const paths:Record<string,string>={
+  sun:'<circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M2 12h2m16 0h2M5 5l1.5 1.5m11 11L19 19M5 19l1.5-1.5m11-11L19 5"/>',
+  moon:'<path d="M20.5 13A8.6 8.6 0 0 1 11 3.5 8.7 8.7 0 1 0 20.5 13Z"/>',
+  warm:'<path d="M4 16h16M7 13a5 5 0 0 1 10 0M12 2v3M3 7l2 2m14 0 2-2M4 20h16"/>',
+  arrow:'<path d="M5 12h14m-6-6 6 6-6 6"/>',
+  close:'<path d="m6 6 12 12M6 18 18 6"/>',
+  reset:'<path d="M4 10a8 8 0 1 1 1 7M4 4v6h6"/>',
+  pin:'<circle cx="12" cy="12" r="3"/><circle cx="12" cy="12" r="8"/>',
+  orbit:'<ellipse cx="12" cy="12" rx="10" ry="5" transform="rotate(-35 12 12)"/><circle cx="12" cy="12" r="2"/>',
+  focus:'<path d="M8 3H3v5m13-5h5v5M3 16v5h5m13-5v5h-5"/><circle cx="12" cy="12" r="3"/>',
+  grid:'<rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/>',
+  help:'<circle cx="12" cy="12" r="9"/><path d="M9 9a3 3 0 0 1 6 0c0 2-3 2-3 4m0 3h.01"/>',
+  power:'<path d="M12 2v10m-5-8a9 9 0 1 0 10 0"/>',
+  play:'<path d="m8 5 11 7-11 7Z"/>',
+  pause:'<path d="M8 5v14M16 5v14"/>',
+  camera:'<path d="M3 6h4l2-3h6l2 3h4v14H3Z"/><circle cx="12" cy="13" r="4"/>',
+  chevron:'<path d="m9 5 7 7-7 7"/>',
+  expand:'<path d="M4 9V4h5m6 0h5v5M4 15v5h5m6 0h5v-5"/>',
+  volume:'<path d="M11 4 5 9H2v6h3l6 5ZM15 8a6 6 0 0 1 0 8m3-11a10 10 0 0 1 0 14"/>',
+};
+export const icon=(name:string)=>`<svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">${paths[name]||paths.pin}</svg>`;
