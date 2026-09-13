@@ -104,7 +104,10 @@ test('every entry renders from the content module', async ({ page }) => {
   }
 
   for (const channel of channels) {
-    await expect(page.locator('#contact')).toContainText(channel.label);
+    const shown = page.locator('#contact').getByRole('link', { name: channel.label, exact: true });
+    if (channel.href) await expect(shown).toHaveAttribute('href', channel.href);
+    // A channel with nowhere to go is left out rather than shown as dead text.
+    else await expect(page.locator('#contact')).not.toContainText(channel.label);
   }
   await expect(page.locator('#contact')).toContainText(site.thaiLine);
 });
