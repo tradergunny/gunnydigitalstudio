@@ -167,7 +167,7 @@ export const facets: Facet[] = [
     id: 'trader',
     label: 'Trader',
     body: 'I trade the morning session discretionarily. My own money, my own judgement, and nothing I write or post is financial advice.',
-    link: { label: 'Follow on X', href: null },
+    link: { label: 'Follow on X', href: 'https://x.com/GunnyTrader' },
   },
   {
     id: 'creator',
@@ -196,7 +196,7 @@ export const testimonials: Testimonial[] = [
 
 export const channels: Channel[] = [
   { label: 'GitHub', href: 'https://github.com/tradergunny', placeholder: false },
-  { label: 'X', href: null, placeholder: true },
+  { label: 'X', href: 'https://x.com/GunnyTrader', placeholder: false },
   { label: 'YouTube', href: null, placeholder: true },
   { label: 'Résumé', href: null, placeholder: true },
 ];
