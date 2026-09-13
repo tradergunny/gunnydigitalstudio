@@ -1,11 +1,11 @@
 import './style.css';
 import {
-  channels,
   experience,
   facets,
   hasPlaceholders,
   hotspotHref,
   hotspots,
+  liveChannels,
   sections,
   site,
   work,
@@ -17,11 +17,10 @@ const app = document.querySelector<HTMLDivElement>('#app')!;
 const escape = (value: string) =>
   value.replace(/[&<>"]/g, character => `&#${character.charCodeAt(0)};`);
 
-/** A channel is a link once it has somewhere to go, and quiet text until then. */
 const channelMarkup = (channel: Channel) =>
-  channel.href
-    ? `<a href="${escape(channel.href)}" rel="me noreferrer" target="_blank">${escape(channel.label)}</a>`
-    : `<span class="channel-pending">${escape(channel.label)}</span>`;
+  `<li><a href="${escape(channel.href!)}" rel="me noreferrer" target="_blank">${escape(
+    channel.label,
+  )}</a></li>`;
 
 const TICKS = 22;
 
@@ -87,7 +86,7 @@ app.innerHTML = `
           <li>${escape(site.roles[0])}</li>
           <li>${escape(site.location)}</li>
         </ul>
-        <ul class="hero-channels">${channels.map(channel => `<li>${channelMarkup(channel)}</li>`).join('')}</ul>
+        <ul class="hero-channels">${liveChannels.map(channelMarkup).join('')}</ul>
       </div>
     </section>
 
@@ -138,7 +137,7 @@ app.innerHTML = `
                     ? `<a class="facet-link caps" href="${escape(facet.link.href)}"${
                         facet.link.href.startsWith('#') ? '' : ' rel="noreferrer" target="_blank"'
                       }>${escape(facet.link.label)}</a>`
-                    : `<span class="facet-link caps channel-pending">${escape(facet.link.label)}</span>`
+                    : ''
                 }
               </div>
             </article>`,
@@ -152,9 +151,7 @@ app.innerHTML = `
       <div class="section-body">
         <a class="email" href="mailto:${escape(site.email)}">${escape(site.email)}</a>
         <p class="thai" lang="th">${escape(site.thaiLine)}</p>
-        <ul class="contact-channels caps">${channels
-          .map(channel => `<li>${channelMarkup(channel)}</li>`)
-          .join('')}</ul>
+        <ul class="contact-channels caps">${liveChannels.map(channelMarkup).join('')}</ul>
       </div>
     </section>
   </main>

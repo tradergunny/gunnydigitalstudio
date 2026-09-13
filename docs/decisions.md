@@ -124,3 +124,11 @@ See `docs/3d-feasibility.md`. The real GLB works in the hero slot with hotspots 
 **Provenance:** both rasters are Pillow 10.3 WebP encodes (quality 80, method 6) of `public/studio-poster.png` at commit `5b1bb16`, the Blender render of the studio; the 700 px variant is a Lanczos downscale of the same frame. No retouching, no crop. Re-derive them from that PNG in git history rather than editing the WebPs.
 
 **Why:** ADR 0002 makes the Poster the first paint on every device. A 2.4 MB PNG in the hero contradicts that; 68 KB does not, and it matches the measured budget in `docs/3d-feasibility.md`.
+
+## 2026-09-14 — Real channels confirmed; empty ones are not drawn
+
+**Confirmed by Sila:** contact is `tradergunny@gmail.com`, X is https://x.com/GunnyTrader, GitHub is https://github.com/tradergunny. There is no YouTube channel and no résumé yet.
+
+**Decision:** a channel with no URL is left out of the page rather than shown as greyed-out text. The entry stays in `channels` with `href: null`; giving it a URL is the only step needed to make it appear, in both the hero footer and Contact. The Creator facet therefore carries its body copy and no link for now.
+
+**Why:** a dead "YOUTUBE" and "RÉSUMÉ" in a link list read as broken rather than as forthcoming, and the footer note already tells a visitor that entries are still samples.

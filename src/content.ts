@@ -55,7 +55,7 @@ export interface Testimonial extends Placeholder {
 
 export interface Channel extends Placeholder {
   label: string;
-  /** Null renders as plain text rather than a dead link. */
+  /** Null while the channel does not exist yet; the page leaves it out until it does. */
   href: string | null;
 }
 
@@ -194,12 +194,16 @@ export const testimonials: Testimonial[] = [
   },
 ];
 
+// Give an entry an href and it appears, in this order, in the hero footer and in Contact.
 export const channels: Channel[] = [
   { label: 'GitHub', href: 'https://github.com/tradergunny', placeholder: false },
   { label: 'X', href: 'https://x.com/GunnyTrader', placeholder: false },
   { label: 'YouTube', href: null, placeholder: true },
   { label: 'Résumé', href: null, placeholder: true },
 ];
+
+/** The channels that exist. The rest wait in `channels` until they have a URL. */
+export const liveChannels = channels.filter(channel => channel.href);
 
 export const hotspots: Hotspot[] = [
   {
