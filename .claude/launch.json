@@ -15,17 +15,17 @@
       "port": 5173
     },
     {
-      "name": "dev-proto",
+      "name": "preview",
       "runtimeExecutable": "npm",
       "runtimeArgs": [
         "run",
-        "dev",
+        "preview",
         "--",
         "--port",
-        "5174",
+        "4173",
         "--strictPort"
       ],
-      "port": 5174
+      "port": 4173
     }
   ]
 }

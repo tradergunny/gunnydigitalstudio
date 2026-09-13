@@ -102,3 +102,25 @@ See `docs/3d-feasibility.md`. The real GLB works in the hero slot with hotspots 
 **Decision:** Hosted on Vercel as static Vite output. The GLB is pre-compressed at build time (brotli, gzip fallback) and served with the correct `Content-Encoding` via Vercel headers config, since Vercel does not reliably compress `model/gltf-binary`. Contact is a plain `mailto:` link, no form, no backend.
 
 **Rejected:** Cloudflare Pages (edge compression for free, but a second platform); a contact form (needs a backend or a third-party service for no gain at this scale).
+
+## 2026-09-14 — Portfolio page shipped on the Poster; renderer parked
+
+**Decision:** The one-page portfolio replaces the interactive-room app. The Hero, the four Sections and the page footer are built and render entirely from `src/content.ts`. The Studio slot shows the Poster only; the three Hotspots sit at fixed percentage positions on it and are plain anchors into their Section or Facet. The Live scene, its state machine and the `window.__gunny` diagnostics object are the next ticket.
+
+**Removed:** the state store (`src/state.ts`), ambient audio, the icon set, the eleven object panels and markers, the help dialog, saved state, and the old stylesheet. `src/render/studio.ts` stays untouched in behaviour but now carries its own object table, `ObjectId`, `StudioState` and an English canvas label, so it compiles with the store gone.
+
+**Consequences:** `main.ts` no longer imports Three, so the shipped bundle is 10 kB of script and 6 kB of CSS. The GLB still ships in `public/` for the next ticket.
+
+**Departures worth knowing:**
+- The masthead is not sticky. The direction contract puts the header row inside the full-viewport Hero, as the supplied reference does, so the nav underline and the tick strip track scroll only while the Hero is on screen.
+- The hero footer row is dropped below 820px and the nav narrows to Contact alone below 560px, per the locked mobile note. Tablets keep all four nav items.
+- The Studio square is capped at `min(70svh, 100svh - --hero-chrome)`. 70svh alone overflows the Hero between roughly 900 and 1150 px of viewport height, which pushed the hero footer off the screen.
+- No dark variant yet: the page declares `color-scheme: light` and paints its own ground, so a dark preference is legible rather than designed. User story 39 stays open.
+
+## 2026-09-14 — Poster shipped as WebP
+
+**Decision:** `public/studio-poster.webp` (1400 px, 68 KB) and `public/studio-poster-700.webp` (700 px, 25 KB) are the shipping Poster, served through one `srcset`. The 2.4 MB `public/studio-poster.png` is removed from the bundle.
+
+**Provenance:** both rasters are Pillow 10.3 WebP encodes (quality 80, method 6) of `public/studio-poster.png` at commit `5b1bb16`, the Blender render of the studio; the 700 px variant is a Lanczos downscale of the same frame. No retouching, no crop. Re-derive them from that PNG in git history rather than editing the WebPs.
+
+**Why:** ADR 0002 makes the Poster the first paint on every device. A 2.4 MB PNG in the hero contradicts that; 68 KB does not, and it matches the measured budget in `docs/3d-feasibility.md`.

@@ -3,8 +3,29 @@ import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { MeshoptDecoder } from 'three/addons/libs/meshopt_decoder.module.js';
 import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
-import type { ObjectId, StudioState } from '../state';
-import { byId } from '../content';
+
+/* Carried over from the interactive-room build so this module still stands on its own after
+   the state store was removed. The live-scene ticket trims what the portfolio hero does not
+   use; until then the renderer keeps its own object table, types and lighting state. */
+export type ObjectId = 'workstation' | 'laptop' | 'pc' | 'speakers' | 'lamp' | 'chair' | 'blind' | 'drawer' | 'headphones' | 'server' | 'camera';
+export type Mood = 'day' | 'warm' | 'night';
+export interface StudioState {
+  mood: Mood; light: number; monitors: boolean; laptop: boolean; pc: boolean;
+  lamp: boolean; server: boolean; blind: number; drawer: boolean; chair: number;
+}
+export const objectPositions: Record<ObjectId, [number, number, number]> = {
+  workstation: [-1.05, 2.22, -2.27],
+  lamp: [-2.48, 2.23, -1.66],
+  pc: [1.05, .90, -1.62],
+  server: [2.04, .92, .31],
+  chair: [-.89, 1.54, .20],
+  blind: [2.85, 2.94, -1.2],
+  drawer: [-2.22, 1.03, -1.50],
+  laptop: [.71, 1.72, -1.77],
+  speakers: [-2.38, 1.77, -2.10],
+  headphones: [2.43, 1.64, .865],
+  camera: [2.35, 1.48, 2.08],
+};
 
 type MaterialRecord={material:THREE.MeshStandardMaterial;color:THREE.Color;emission:THREE.Color;intensity:number;name:string;mesh:THREE.Mesh};
 export class Studio {
@@ -47,7 +68,7 @@ export class Studio {
     this.renderer.setClearColor(0x000000,0);
     this.renderer.toneMapping=THREE.ACESFilmicToneMapping;this.renderer.toneMappingExposure=1.15;
     this.renderer.shadowMap.enabled=true;this.renderer.shadowMap.type=THREE.PCFSoftShadowMap;
-    this.renderer.domElement.setAttribute('aria-label','โมเดลห้องทำงาน 3 มิติ ลากเพื่อหมุน เลื่อนเพื่อซูม หรือเลือกวัตถุจากรายการอุปกรณ์');
+    this.renderer.domElement.setAttribute('aria-label','A 3D model of the GunnyTrader studio. Drag to look around.');
     this.renderer.domElement.setAttribute('role','img');
     container.prepend(this.renderer.domElement);
     this.camera=new THREE.OrthographicCamera(-5,5,4,-4,.1,70);this.camera.position.copy(this.cameraGoal);
@@ -81,12 +102,12 @@ export class Studio {
     const loader=new GLTFLoader();loader.setMeshoptDecoder(MeshoptDecoder);
     const gltf=await loader.loadAsync(`${import.meta.env.BASE_URL}models/studio.glb`,event=>{if(event.total)progress(event.loaded/event.total*95);});
     const model=gltf.scene;this.scene.add(model);
-    for(const id of ['room','cove',...Object.keys(byId)]){
+    for(const id of ['room','cove',...Object.keys(objectPositions)]){
       const root=model.getObjectByName(id);if(!root)continue;this.roots.set(id,root);
       const records:MaterialRecord[]=[];
       root.traverse(object=>{
         if(!(object instanceof THREE.Mesh))return;
-        object.castShadow=true;object.receiveShadow=true;object.userData.interaction=byId[id as ObjectId]?id:undefined;
+        object.castShadow=true;object.receiveShadow=true;object.userData.interaction=objectPositions[id as ObjectId]?id:undefined;
         const materials=Array.isArray(object.material)?object.material:[object.material];
         const clones=materials.map(original=>{
           const material=original.clone() as THREE.MeshStandardMaterial;
@@ -141,7 +162,7 @@ export class Studio {
     }
   }
   focus(id:ObjectId){
-    this.selected=id;const pos=new THREE.Vector3(...byId[id].position);this.target.copy(pos);
+    this.selected=id;const pos=new THREE.Vector3(...objectPositions[id]);this.target.copy(pos);
     this.cameraGoal.copy(pos).add(new THREE.Vector3(-7,5,8));this.zoomGoal=2.05;this.tweening=true;this.controls.autoRotate=false;
   }
   select(id?:ObjectId){this.selected=id;}
