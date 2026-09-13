@@ -1,6 +1,6 @@
 # 3D feasibility: the real GLB in the hero slot
 
-Measured 2026-09-14 with `prototypes/hero.html`, which places the existing `Studio` renderer inside the Gallery hero slot (square, 7 of 12 columns, capped at 70svh) on a light ground with the poster underneath and three projected hotspots.
+Measured 2026-09-14 with `prototypes/hero.html` (since deleted; see git history at commit `5b1bb16`), which places the existing `Studio` renderer inside the Gallery hero slot (square, 7 of 12 columns, capped at 70svh) on a light ground with the poster underneath and three projected hotspots.
 
 ## What works
 

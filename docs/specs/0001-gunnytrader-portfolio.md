@@ -107,5 +107,5 @@ The Studio is a hero stage, never navigation. The Poster (a WebP still) paints f
 ## Further Notes
 
 - Decisions and their reasoning: `docs/decisions.md`, ADR 0001 (studio as hero stage), ADR 0002 (poster first, progressive live scene), `docs/3d-feasibility.md` (measurements), `CONTEXT.md` (glossary), `PRODUCT.md`.
-- Visual reference: the light variant of https://claude.ai/code/artifact/df31bb99-ef7e-4b43-86e3-adb426257711 and the feasibility prototype in `prototypes/hero.html`, which already places the renderer in the slot with projected Hotspots and camera focus. The prototype and its launch configs can be deleted once the real Hero exists.
+- Visual reference: the light variant of https://claude.ai/code/artifact/df31bb99-ef7e-4b43-86e3-adb426257711. The feasibility prototype (`prototypes/hero.html` and its `dev-proto` launch config) was deleted once the real Hero landed; it showed the renderer in the slot with projected Hotspots and camera focus, and is recoverable from git history at commit `5b1bb16`.
 - The wall in the model reads GunnyTrader; the brand decision matches it.
