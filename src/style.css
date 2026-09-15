@@ -155,9 +155,14 @@ img {
   border-bottom-color: var(--ink);
 }
 
+/* The wordmark and the room are one object, so both columns take the width they need and
+   the pair is centred together. Proportional columns let them drift to opposite edges on a
+   wide display, leaving a quarter of the screen empty between them with nothing to look at;
+   the masthead and the hero footer stay full-bleed and frame the pair. */
 .hero-main {
   display: grid;
-  grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+  grid-template-columns: auto auto;
+  justify-content: center;
   gap: clamp(32px, 5vw, 76px);
   align-items: center;
   padding: clamp(20px, 3vh, 48px) 0;
@@ -212,13 +217,14 @@ img {
   background: var(--coral);
 }
 
-/* The studio slot: one square object, the only image on the page.
-   Capped at 70svh by the direction contract, and again at what the hero row can spare
-   once the header, the caption and the hero footer have taken their fixed share
-   (--hero-chrome), so the footer never falls off a short screen. */
+/* The studio slot: one square object, the only image on the page. It takes as much of the
+   hero row as it can get: what is left once the header, the caption and the hero footer
+   have taken their share (--hero-chrome, measured at 241-309px across screen sizes), held
+   under 74svh so it stays a hero rather than the whole page, and under 46vw so the pair
+   above never outgrows a wide-but-short window. */
 .stage-column {
-  --hero-chrome: 330px;
-  --stage-size: min(100%, 70svh, calc(100svh - var(--hero-chrome)));
+  --hero-chrome: 280px;
+  --stage-size: min(74svh, 46vw, calc(100svh - var(--hero-chrome)));
   display: flex;
   flex-direction: column;
   align-items: flex-end;
@@ -489,6 +495,7 @@ a.facet-link:hover {
 
   .hero-main {
     grid-template-columns: minmax(0, 1fr);
+    justify-content: stretch;
     gap: 34px;
     align-items: start;
   }
