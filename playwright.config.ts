@@ -3,7 +3,9 @@ import { defineConfig, devices } from '@playwright/test';
 /* The one test seam: the production build, served by `vite preview`, driven in a real browser.
    Desktop is 1440 wide; the phone is 390 wide with touch and a device pixel ratio of 2. */
 
-const PORT = 4173;
+/* Override with PORT=… when another checkout already holds 4173, since a running server on
+   the port is reused as is and would serve that checkout's build instead of this one's. */
+const PORT = Number(process.env.PORT) || 4173;
 const baseURL = `http://127.0.0.1:${PORT}`;
 
 export default defineConfig({

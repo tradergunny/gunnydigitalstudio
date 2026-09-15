@@ -239,8 +239,34 @@ img {
   display: block;
 }
 
+/* The live scene fades in over the poster, framed the same, so the room never jumps and is
+   never thinner than the poster beneath it. Once the canvas is fully in, the poster steps
+   aside so its own ground does not show around the room. The hotspots stay on top of both.
+   Leaving the live state has no transition: the poster is simply there again. */
+.stage canvas {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  display: block;
+  width: 100% !important;
+  height: 100% !important;
+  opacity: 0;
+  transition: opacity 0.6s;
+  cursor: grab;
+}
+
+.stage.live canvas {
+  opacity: 1;
+}
+
+.stage.live .poster {
+  opacity: 0;
+  transition: opacity 0.2s 0.6s;
+}
+
 .hotspot {
   position: absolute;
+  z-index: 2;
   width: 10px;
   height: 10px;
   margin: -5px 0 0 -5px;
@@ -279,8 +305,9 @@ img {
 
 .stage-caption {
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-between;
-  gap: 24px;
+  gap: 4px 24px;
   width: var(--stage-size);
   margin-top: 14px;
 }
@@ -520,5 +547,12 @@ a.facet-link:hover {
   *::after {
     transition-duration: 0.01ms !important;
     animation-duration: 0.01ms !important;
+  }
+
+  /* The live scene appears in one step; the rule above shortens durations but not the
+     poster's delay, so both transitions go entirely. */
+  .stage canvas,
+  .stage.live .poster {
+    transition: none !important;
   }
 }
