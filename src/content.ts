@@ -26,6 +26,22 @@ export interface WorkEntry extends Placeholder {
   year: string;
   /** External URL, or null while there is nothing to open. */
   href: string | null;
+  /** A selected project shown in full above the list, with stills, facts and links. */
+  feature?: Feature;
+}
+
+export interface Feature {
+  /** One tracked-caps line above the title: what kind of project this was. */
+  kicker: string;
+  /** The project's name in its own language, shown beside the English title. */
+  localTitle?: { text: string; lang: string };
+  /** Two or three sentences a client can read in ten seconds. */
+  lede: string;
+  facts: { label: string; value: string }[];
+  highlights: string[];
+  /** Stills under /public, each with a smaller variant for narrow screens. */
+  stills: { src: string; small: string; alt: string }[];
+  links: { label: string; href: string }[];
 }
 
 export interface ExperienceEntry extends Placeholder {
@@ -111,6 +127,46 @@ export const sections: { id: SectionId; label: string }[] = [
 ];
 
 export const work: WorkEntry[] = [
+  {
+    title: 'KapiBarian',
+    summary:
+      'A reading-literacy card-battle RPG for Thai Grade 9 students, mapped to PISA 2018.',
+    year: '2026',
+    href: 'https://kapibarian.vercel.app',
+    placeholder: false,
+    feature: {
+      kicker: 'External project · Built for Thai Grade 9 classrooms',
+      localTitle: { text: 'คืนก่อนลอยกระทง', lang: 'th' },
+      lede: 'A browser card-battle RPG that builds reading literacy in Thai public-school students. Every attack is a line of evidence pulled from a real text, so the game cannot be won without reading. Delivered as an external project for real Grade 9 students rather than coursework, and designed around the three PISA 2018 reading processes.',
+      facts: [
+        { label: 'Audience', value: 'Thai Grade 9, public schools' },
+        { label: 'Team', value: 'Four people — game design, writing and full build' },
+        { label: 'Scope', value: '3 chapters · 6 fights · 18 evidence cards' },
+        { label: 'Stack', value: 'HTML, CSS, JavaScript · Vercel' },
+      ],
+      highlights: [
+        'One engine, three games: a distinct card mechanic for each PISA process — Locate, Understand, Evaluate and Reflect.',
+        'Feedback that teaches: a three-step hint ladder narrows the text without revealing the answer. No score, no timer, no game over.',
+        'Guess-resistant by design: across 24 scripted random-play runs, only 3 of 144 cards were right on the first try.',
+      ],
+      stills: [
+        {
+          src: 'work/kapibarian/cover-map-1600.jpg',
+          small: 'work/kapibarian/cover-map-800.jpg',
+          alt: 'KapiBarian chapter map: a pixel-art Thai canal town at night before Loy Krathong, with signs for the pier market, the village and the town board.',
+        },
+        {
+          src: 'work/kapibarian/cover-L-hit-1600.jpg',
+          small: 'work/kapibarian/cover-L-hit-800.jpg',
+          alt: 'A KapiBarian battle: a Thai health notice on the left with the evidence line highlighted, and Kapi striking a ghost on the right.',
+        },
+      ],
+      links: [
+        { label: 'Play the game', href: 'https://kapibarian.vercel.app' },
+        { label: 'View the pitch deck', href: 'work/kapibarian/' },
+      ],
+    },
+  },
   {
     title: 'GunnyTrader studio',
     summary: 'This page, and the Blender model of my workroom that opens it.',

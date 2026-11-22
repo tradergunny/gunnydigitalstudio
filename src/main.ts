@@ -10,6 +10,7 @@ import {
   site,
   work,
   type Channel,
+  type WorkEntry,
 } from './content';
 import { mountStudio } from './studio';
 
@@ -24,6 +25,46 @@ const channelMarkup = (channel: Channel) =>
   )}</a></li>`;
 
 const TICKS = 22;
+
+/** A selected project, in full: stills, what it is, the facts a client scans, and links out. */
+const featureMarkup = (entry: WorkEntry) => {
+  const feature = entry.feature!;
+  return `<article class="feature" aria-labelledby="feature-${escape(entry.title.toLowerCase())}">
+    <div class="feature-stills">${feature.stills
+      .map(
+        still => `<img src="${escape(still.src)}" srcset="${escape(still.small)} 800w, ${escape(
+          still.src,
+        )} 1600w" sizes="(max-width: 820px) 100vw, 32vw" width="1600" height="900" loading="lazy" decoding="async" alt="${escape(
+          still.alt,
+        )}" />`,
+      )
+      .join('')}</div>
+    <div class="feature-head">
+      <p class="caps feature-kicker">${escape(feature.kicker)}</p>
+      <h3 class="feature-title" id="feature-${escape(entry.title.toLowerCase())}">${escape(entry.title)}${
+        feature.localTitle
+          ? ` <span lang="${escape(feature.localTitle.lang)}">${escape(feature.localTitle.text)}</span>`
+          : ''
+      }</h3>
+      <span class="caps row-meta">${escape(entry.year)}</span>
+    </div>
+    <p class="feature-lede">${escape(feature.lede)}</p>
+    <dl class="feature-facts">${feature.facts
+      .map(fact => `<div><dt class="caps">${escape(fact.label)}</dt><dd>${escape(fact.value)}</dd></div>`)
+      .join('')}</dl>
+    <ul class="feature-highlights">${feature.highlights
+      .map(line => `<li>${escape(line)}</li>`)
+      .join('')}</ul>
+    <ul class="feature-links caps">${feature.links
+      .map(
+        link =>
+          `<li><a href="${escape(link.href)}" rel="noreferrer" target="_blank">${escape(
+            link.label,
+          )}<span aria-hidden="true"> ↗</span></a></li>`,
+      )
+      .join('')}</ul>
+  </article>`;
+};
 
 app.innerHTML = `
   <main>
@@ -94,7 +135,9 @@ app.innerHTML = `
     <section class="section" id="work" aria-labelledby="work-label">
       <h2 class="caps section-label" id="work-label">Work</h2>
       <div class="section-body">
+        ${work.filter(entry => entry.feature).map(featureMarkup).join('')}
         <ol class="rows">${work
+          .filter(entry => !entry.feature)
           .map(entry => {
             const title = entry.href
               ? `<a href="${escape(entry.href)}" rel="noreferrer" target="_blank">${escape(entry.title)}</a>`

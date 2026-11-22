@@ -79,8 +79,19 @@ test('the hotspots on the poster lead into the page', async ({ page }) => {
 });
 
 test('every entry renders from the content module', async ({ page }) => {
-  await expect(page.locator('#work ol > li')).toHaveCount(work.length);
-  for (const entry of work) {
+  const featured = work.filter(entry => entry.feature);
+  await expect(page.locator('#work article.feature')).toHaveCount(featured.length);
+  for (const entry of featured) {
+    const article = page.locator('#work article.feature', { hasText: entry.title });
+    await expect(article).toContainText(entry.feature!.lede);
+    await expect(article).toContainText(entry.year);
+    for (const link of entry.feature!.links) {
+      await expect(article.getByRole('link', { name: link.label })).toHaveAttribute('href', link.href);
+    }
+  }
+
+  await expect(page.locator('#work ol > li')).toHaveCount(work.length - featured.length);
+  for (const entry of work.filter(entry => !entry.feature)) {
     await expect(page.locator('#work')).toContainText(entry.title);
     await expect(page.locator('#work')).toContainText(entry.summary);
     await expect(page.locator('#work')).toContainText(entry.year);
