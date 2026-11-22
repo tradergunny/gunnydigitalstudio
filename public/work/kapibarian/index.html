@@ -1,0 +1,420 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><title>KapiBarian — Pitch Deck</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chonburi&family=Sarabun:wght@400;600;700&display=swap">
+<style>*{margin:0}html,body{height:100%;background:#000;overflow:hidden}body{font:32px/1.2 'Sarabun',Arial,sans-serif}
+#stage{position:absolute;left:50%;top:50%;width:1920px;height:1080px;transform-origin:0 0}
+#stage>section{width:1920px!important;height:1080px!important;overflow:hidden!important;box-sizing:border-box!important;position:absolute;left:0;top:0;isolation:isolate;visibility:hidden;opacity:0;transition:opacity .35s}
+#stage>section.on{visibility:visible;opacity:1}
+aside{display:none!important}
+h1{font-size:96px}h2{font-size:64px}h3{font-size:44px}
+p,li,h1,h2,h3,td,th{overflow-wrap:break-word;text-wrap:pretty}
+table{width:100%;border-collapse:separate;border-spacing:0;border:solid #0003;border-width:2px 0 0 2px}
+th,td{padding:.35em .6em;text-align:left;border:solid #0003;border-width:0 2px 2px 0}
+.bleed,.scrim{z-index:-1}
+#n{position:fixed;right:14px;bottom:10px;font:14px Arial;color:#fff8;z-index:9}
+@media print{html,body{overflow:visible;height:auto;background:#fff}#stage{position:static;transform:none!important}#stage>section{position:relative;visibility:visible;opacity:1;page-break-after:always}#n{display:none}@page{size:1920px 1080px;margin:0}}
+body { font-family: 'Sarabun', Arial, sans-serif; }
+
+section {
+  background: #f6ecd2;
+  color: #33273f;
+  padding: 104px 128px;
+  display: flex;
+  flex-direction: column;
+  gap: 36px;
+}
+section.dark { background: #15102e; color: #e4dcf5; }
+section.accent { background: #f29a38; color: #1c1538; }
+
+h1 { font-family: 'Chonburi', Georgia, serif; font-weight: 400; font-size: 150px; line-height: 1.05; color: #fbefcf; }
+h2 { font-family: 'Chonburi', Georgia, serif; font-weight: 400; font-size: 64px; line-height: 1.15; color: #1c1538; }
+h3 { font-family: 'Chonburi', Georgia, serif; font-weight: 400; font-size: 38px; line-height: 1.2; color: #1c1538; }
+p { font-size: 30px; line-height: 1.4; }
+.dark h2 { color: #fbefcf; }
+.dark h3 { color: #fbefcf; }
+
+.eyebrow { font-size: 24px; font-weight: 700; letter-spacing: 3px; color: #a6381a; line-height: 1.2; }
+.dark .eyebrow { color: #f29a38; }
+.accent .eyebrow { color: #1c1538; }
+.head { display: flex; flex-direction: column; gap: 12px; }
+
+.lede { font-size: 34px; line-height: 1.4; }
+.small { font-size: 26px; line-height: 1.4; }
+.note { font-size: 24px; line-height: 1.4; color: #6b5d76; }
+.dark .note { color: #b3a8cf; }
+.thai { font-family: 'Chonburi', Georgia, serif; font-size: 30px; color: #a6381a; line-height: 1.3; }
+.dark .thai { color: #f29a38; }
+
+.row { display: flex; gap: 48px; }
+.col { display: flex; flex-direction: column; gap: 20px; flex: 1; }
+.tight { gap: 8px; }
+.spacer { flex: 1; }
+.center { align-items: center; }
+
+.shot { box-sizing: border-box; border: 4px solid #1c1538; border-radius: 8px; box-shadow: 0 16px 40px rgba(20, 12, 40, 0.35); object-fit: contain; background: #15102e; }
+.dark .shot { border: 4px solid #f29a38; }
+
+/* numbered steps and agenda rows */
+.step { display: flex; gap: 24px; align-items: flex-start; }
+.num { font-family: 'Chonburi', Georgia, serif; font-size: 44px; line-height: 1.1; color: #a6381a; width: 56px; flex: none; }
+.step .small { flex: 1; }
+.dark .num { color: #f29a38; }
+.mins { font-family: 'Chonburi', Georgia, serif; font-size: 52px; line-height: 1.1; color: #a6381a; width: 230px; }
+.agenda-row { display: flex; gap: 32px; align-items: center; border-top: 2px solid #d9c79c; padding: 22px 0 0 0; }
+
+/* big figures */
+.fig { font-family: 'Chonburi', Georgia, serif; font-size: 96px; line-height: 1; color: #a6381a; }
+.dark .fig { color: #f29a38; }
+.stat { display: flex; flex-direction: column; gap: 8px; flex: 1; }
+
+/* panels */
+.panel { background: #fffaf0; border: 3px solid #1c1538; border-radius: 8px; padding: 32px; display: flex; flex-direction: column; gap: 12px; flex: 1; }
+.dark .panel { background: #221a45; border: 3px solid #4b3f7a; }
+.mission { background: #1c1538; border-radius: 8px; padding: 32px 36px; display: flex; flex-direction: column; gap: 8px; }
+.mission .lede { color: #fbefcf; }
+.mission .eyebrow { color: #f29a38; }
+
+table { font-size: 30px; color: #33273f; }
+.dark table { color: #e4dcf5; }
+
+/* cover and close */
+section.full { padding: 128px; justify-content: flex-end; gap: 20px; background: #0d0a1f; color: #fbefcf; }
+.bleed { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; object-fit: cover; }
+.scrim { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; background: linear-gradient(90deg, rgba(13, 10, 31, 0.94), rgba(13, 10, 31, 0.2)); }
+.full .eyebrow { color: #f29a38; }
+.sub { font-family: 'Chonburi', Georgia, serif; font-size: 64px; line-height: 1.2; color: #f29a38; }
+.statement { font-family: 'Chonburi', Georgia, serif; font-size: 104px; line-height: 1.12; color: #1c1538; }
+.url { font-size: 44px; font-weight: 700; color: #fbefcf; }
+</style><style>
+#back{position:fixed;left:16px;top:12px;z-index:9;font:600 12px/1 Arial,sans-serif;letter-spacing:.18em;text-transform:uppercase;color:#fff;text-decoration:none;background:rgba(13,10,31,.72);padding:10px 14px}
+#back:hover{background:#ce4257}
+#hint{position:fixed;left:16px;bottom:10px;z-index:9;font:13px Arial,sans-serif;color:#fff8;transition:opacity .6s}
+@media print{#back,#hint{display:none}}
+</style>
+</head><body><div id="stage"><section id="cover" class="full" data-transition="fade">
+<img class="bleed" src="assets/bg-title.webp" alt="A canal at night filled with floating krathongs, sky lanterns and fireworks over a temple">
+<div class="scrim"></div>
+<p class="eyebrow">READING-LITERACY GAME · THAI GRADE 9</p>
+<h1>KapiBarian</h1>
+<p class="sub">คืนก่อนลอยกระทง</p>
+<p class="lede" style="width:900px">A card-battle RPG for Grade 9 readers, where the only weapon is a line from the text.</p>
+<p class="small" style="margin-top:40px">Sila Ngamsangiam · Arnav Parihar · Tanat Dhammaraks · Tanakrit Kasemsawat</p>
+</section>
+<section id="player" data-transition="fade">
+<div class="head">
+<p class="eyebrow">WHO IT IS FOR</p>
+<h2>The player and the mission</h2>
+</div>
+<div class="row">
+<div class="col" style="gap:28px">
+<p class="lede">Thai Grade 9 students in public schools, playing in a laptop browser. Three short chapters, one for each PISA 2018 reading process.</p>
+<div class="mission">
+<p class="eyebrow">THE MISSION, IN ONE SENTENCE</p>
+<p class="lede">A rumor says the canal is poisoned and tomorrow’s Loy Krathong is cancelled; find out what is true before the festival, using only what the texts say.</p>
+</div>
+</div>
+<div style="display:flex; flex-direction:column; gap:16px; width:340px">
+<img class="shot" src="assets/kapi-portrait.png" alt="Pixel portrait of Kapi, a capybara blacksmith" style="width:340px; height:340px; object-fit:cover">
+<p class="note">Kapi, a wandering card-smith. His cards only work when forged from true words.</p>
+</div>
+</div>
+<div class="spacer"></div>
+<div class="row">
+<div class="stat"><p class="fig">3</p><p class="small">chapters on one engine</p></div>
+<div class="stat"><p class="fig">18</p><p class="small">cards across six fights</p></div>
+<div class="stat"><p class="fig">~5 min</p><p class="small">estimated play per chapter</p></div>
+</div>
+</section>
+<section id="rule" class="accent" data-transition="fade" style="justify-content:center; gap:48px">
+<p class="eyebrow">THE RULE FROM THE BRIEF</p>
+<p class="statement" style="width:1500px">A player must not be able to win without reading.</p>
+<p class="lede" style="width:1100px">No reward for speed, none for repeated clicking. Every mechanic we kept had to pass this test, and several we liked did not.</p>
+</section>
+<section id="story" data-transition="fade">
+<div class="head">
+<p class="eyebrow">THE STORY</p>
+<h2>One rumor, three places</h2>
+</div>
+<div class="row">
+<img class="shot" src="assets/map.jpg" alt="The game map: three signposts along a canal for the pier market, the village and the town board" style="width:1138px;height:663px;box-sizing:border-box;flex:0 0 auto">
+<div class="col" style="gap:24px">
+<div class="col tight" style="flex:none">
+<p class="thai">1 · ตลาดท่าน้ำ, the pier market</p>
+<p class="small">A notice, a boat schedule, a water-test table. The water was tested and nothing toxic was found.</p>
+</div>
+<div class="col tight" style="flex:none">
+<p class="thai">2 · หมู่บ้านริมคลอง, the village</p>
+<p class="small">A boat vendor’s account and a workshop diary. Krathong dye turned the water green.</p>
+</div>
+<div class="col tight" style="flex:none">
+<p class="thai">3 · ลานประกาศ, the town board</p>
+<p class="small">A viral post, a purifier advert, the health office notice. The purifier seller started the rumor.</p>
+</div>
+</div>
+</div>
+<p class="lede">Each chapter’s answer becomes the next chapter’s question, and every chapter still makes sense played alone.</p>
+</section>
+<section id="loop" data-transition="fade">
+<div class="head">
+<p class="eyebrow">THE CORE LOOP</p>
+<h2>One turn: forge and fire</h2>
+</div>
+<div class="row">
+<img class="shot" src="assets/L-hit.jpg" alt="A fight: the reading text on the left, the ghost and Kapi top right, three cards below; a gold card has just hit for 10" style="width:1083px;height:633px;box-sizing:border-box;flex:0 0 auto">
+<div class="col" style="gap:22px">
+<div class="step"><p class="num">1</p><p class="small">Read the ghost’s next move: an attack, or a heavy hit worth blocking.</p></div>
+<div class="step"><p class="num">2</p><p class="small">Pick a blank card: strike, block or heal. Each one asks a question.</p></div>
+<div class="step"><p class="num">3</p><p class="small">Drag in the line that answers it. The text stays whole on screen.</p></div>
+<div class="step"><p class="num">4</p><p class="small">Forge. A gold card hits at once. A wrong line cracks the card and the ghost gets its hit.</p></div>
+</div>
+</div>
+<p class="lede">Gold cards in a row build a streak. Accuracy is rewarded and speed never is: there is no timer anywhere in the game.</p>
+</section>
+<section id="cards" data-transition="fade">
+<div class="head">
+<p class="eyebrow">ONE ENGINE, THREE GAMES</p>
+<h2>A card shape for each reading process</h2>
+</div>
+<div style="display:grid; grid-template-columns:repeat(3, 1fr); gap:20px 40px">
+<img class="shot" src="assets/shape-L.jpg" alt="Strike card with one empty slot for a line" style="width:528px; height:276px">
+<img class="shot" src="assets/shape-U.jpg" alt="Chain card with two slots, a cause and an effect, joined by an arrow" style="width:528px; height:276px">
+<img class="shot" src="assets/shape-E.jpg" alt="Verdict card with one slot and four reason stamps" style="width:528px; height:276px">
+<p class="eyebrow" style="margin-top:12px">CHAPTER 1 · LOCATE</p>
+<p class="eyebrow" style="margin-top:12px">CHAPTER 2 · UNDERSTAND</p>
+<p class="eyebrow" style="margin-top:12px">CHAPTER 3 · EVALUATE</p>
+<h3>Strike card</h3>
+<h3>Chain card</h3>
+<h3>Verdict card</h3>
+<p class="small">One slot. Pick the right document first, then the single line that answers.</p>
+<p class="small">Two slots, cause and effect. It forges only if the two lines truly connect.</p>
+<p class="small">One slot plus a stamp. Reject a line and say why it should not be trusted.</p>
+</div>
+<div class="spacer"></div>
+<p class="lede">Guessing gets harder each chapter: one line, then a pair of lines, then a line plus a reason.</p>
+</section>
+<section id="bosses" class="dark" data-transition="fade">
+<div class="head">
+<p class="eyebrow">THE BOSSES</p>
+<h2>Three bosses, three reading habits</h2>
+</div>
+<div style="display:grid; grid-template-columns:repeat(3, 1fr); gap:16px 40px">
+<img class="shot" src="assets/boss-L.webp" alt="A pale-blue slime with one wandering eye, sitting on scattered notices" style="width:528px; height:440px; object-fit:cover">
+<img class="shot" src="assets/boss-U.webp" alt="A green octopus spirit rising from misty water with question-mark thought bubbles" style="width:528px; height:440px; object-fit:cover">
+<img class="shot" src="assets/boss-E.webp" alt="A red-faced, long-nosed winged trickster holding a megaphone and a filter bottle" style="width:528px; height:440px; object-fit:cover">
+<p class="thai" style="margin-top:12px">พญาอ่านข้าม</p>
+<p class="thai" style="margin-top:12px">จอมด่วนสรุป</p>
+<p class="thai" style="margin-top:12px">เจ้าข่าวลือ</p>
+<p class="small">The Skimmer. Its eye skips over lines; you beat it by finding the exact one.</p>
+<p class="small">The Conclusion-Jumper. You beat it by showing which cause led to which effect.</p>
+<p class="small">The Rumor King, who sells water purifiers. You beat him by judging the source.</p>
+</div>
+</section>
+<section id="pisa" data-transition="fade">
+<div class="head">
+<p class="eyebrow">PISA 2018 ALIGNMENT</p>
+<h2>What each chapter asks a reader to do</h2>
+</div>
+<table>
+<tr><th style="width:20%">Reading process</th><th style="width:26%">Chapter and texts</th><th style="width:18%">Card</th><th>To forge it, the player must</th></tr>
+<tr><td>Locate information: retrieve a detail; search and select a text</td><td>1 · Pier market. A notice, a boat schedule, a water-test table</td><td>Strike, one slot, after a scroll pick</td><td>Choose the right document from its title, date and author, then find the one line that answers</td></tr>
+<tr><td>Understand: integrate and infer</td><td>2 · Village. A vendor’s account, a workshop diary</td><td>Chain, two slots</td><td>Join a cause and an effect that no single line states</td></tr>
+<tr><td>Evaluate and reflect: credibility, conflicting claims</td><td>3 · Town board. A viral post, a purifier advert, the health office notice</td><td>Verdict, one slot plus a stamp</td><td>Reject a line from one of two texts that disagree, and stamp the reason: outdated, no source, selling something, or emotive language</td></tr>
+</table>
+<div class="spacer"></div>
+<p class="lede">We rejected a single card shape for all three chapters: Understand and Evaluate would have collapsed into Locate.</p>
+</section>
+<section id="video" class="dark" data-transition="fade" style="gap:28px; align-items:center">
+<div class="head" style="align-self:flex-start">
+<p class="eyebrow">DEMO</p>
+<h2>A 75-second walkthrough</h2>
+</div>
+<video class="shot" src="assets/demo.mp4" poster="assets/demo-still.jpg" controls preload="metadata" style="width:1216px; height:684px"></video>
+</section>
+<section id="live" class="dark" data-transition="fade">
+<div class="head">
+<p class="eyebrow">LIVE DEMO</p>
+<h2>Chapter 1, played live</h2>
+</div>
+<div class="row">
+<div class="col" style="gap:26px">
+<p class="lede">Four moments to watch</p>
+<div class="step"><p class="num">1</p><p class="small">The scroll pick. The player chooses a source from its title, date and author before reading it.</p></div>
+<div class="step"><p class="num">2</p><p class="small">A wrong line, on purpose. The card cracks and Kapi asks a question instead of giving the answer.</p></div>
+<div class="step"><p class="num">3</p><p class="small">The boon. Before the boss, the player chooses their own support.</p></div>
+<div class="step"><p class="num">4</p><p class="small">The result screen. No score, only how each card was found.</p></div>
+</div>
+<img class="shot" src="assets/scroll.jpg" alt="The scroll pick: three documents shown by title, date and author only" style="width:900px; height:506px">
+</div>
+<div class="spacer"></div>
+<p class="note">kapibarian.vercel.app&nbsp;</p>
+</section>
+<section id="theory" data-transition="fade">
+<div class="head">
+<p class="eyebrow">LEARNING THEORY</p>
+<h2>Where the theory sits in the mechanics</h2>
+</div>
+<table>
+<tr><th style="width:17%">Area</th><th style="width:33%">Idea we used</th><th>Mechanic that carries it</th></tr>
+<tr><td>Cognition</td><td>Scaffolding in the zone of proximal development (Vygotsky; Wood, Bruner and Ross). Cognitive load (Sweller)</td><td>A three-step hint ladder. Kapi’s demo card in the first fight, none against the boss. One card open at a time, one idea per speech bubble</td></tr>
+<tr><td>Motivation</td><td>Self-determination: autonomy and competence (Deci and Ryan). Growth mindset (Dweck)</td><td>The player chooses card order and a boon. The Campfire replaces game over. The result screen has no score</td></tr>
+<tr><td>Language and literacy</td><td>Comprehensible input (Krashen). Vocabulary learned in context</td><td>Real text types that grow from about 60 to 130 words. Free context glosses on harder words</td></tr>
+<tr><td>Game-based learning</td><td>Intrinsic integration (Habgood and Ainsworth). Feedback that explains</td><td>Damage comes only from the correct line. Every crack gets a reason, never just a mark</td></tr>
+</table>
+<div class="spacer"></div>
+<p class="lede">The next four slides take one mechanic from each row.</p>
+</section>
+<section id="ladder" data-transition="fade">
+<div class="head">
+<p class="eyebrow">COGNITION</p>
+<h2>Help that narrows and never reveals</h2>
+</div>
+<div style="display:grid; grid-template-columns:repeat(3, 1fr); gap:16px 40px">
+<img class="shot" src="assets/L-hint1.jpg" alt="After the first wrong line: Kapi explains why that line misses" style="width:528px; height:297px">
+<img class="shot" src="assets/L-hint2.jpg" alt="After the second: most of the text is dimmed, one section stays bright" style="width:528px; height:297px">
+<img class="shot" src="assets/L-hint3.jpg" alt="After the third: only three lines stay lit" style="width:528px; height:297px">
+<h3 style="margin-top:12px">First crack</h3>
+<h3 style="margin-top:12px">Second crack</h3>
+<h3 style="margin-top:12px">Third crack</h3>
+<p class="small">Kapi says why that line misses, then asks a guiding question.</p>
+<p class="small">The text dims except the section that holds the answer.</p>
+<p class="small">Three lines stay lit. The card forges bronze, at half damage.</p>
+</div>
+<div class="spacer"></div>
+<p class="lede">Every crack costs HP, so help is always available and never free. Support also fades: Kapi forges a demo card in a chapter’s first fight and none against its boss.</p>
+</section>
+<section id="motivation" data-transition="fade">
+<div class="head">
+<p class="eyebrow">MOTIVATION</p>
+<h2>Choice, competence and a way back</h2>
+</div>
+<div style="display:grid; grid-template-columns:repeat(2, 640px); gap:16px 96px">
+<img class="shot" src="assets/campfire.jpg" alt="The Campfire screen: Kapi rests by a fire and the facts found so far are listed" style="width:640px; height:360px">
+<img class="shot" src="assets/boon.jpg" alt="The boon choice: three options before the boss" style="width:640px; height:360px">
+<h3 style="margin-top:12px">The Campfire</h3>
+<h3 style="margin-top:12px">The boon</h3>
+<p class="small">At 0 HP Kapi rests, lists the facts already found, and the fight resumes with every hint kept. There is no game over.</p>
+<p class="small">Before each boss the player picks one: a full heal, a magnifier that lights the right section once, or a head-start streak.</p>
+</div>
+<div class="spacer"></div>
+<p class="lede">A player who is losing gets the facts back and another attempt. A player who is winning gets a choice about what comes next.</p>
+</section>
+<section id="language" data-transition="fade">
+<div class="head">
+<p class="eyebrow">LANGUAGE AND LITERACY</p>
+<h2>Real texts, and words met in context</h2>
+</div>
+<div class="row">
+<img class="shot" src="assets/gloss-crop.jpg" alt="A health office notice with an underlined word opened: a pop-up uses the word in an easier sentence" style="width:900px; height:571px">
+<div class="col" style="gap:26px">
+<div class="col tight" style="flex:none"><h3>Real formats</h3><p class="small">Notice, table, diary, online post, advert, news clipping. Each is styled as the document it is.</p></div>
+<div class="col tight" style="flex:none"><h3>Texts that grow</h3><p class="small">About 60–80 words against a ghost, 100–130 against a boss. Each is a small step up from the last.</p></div>
+<div class="col tight" style="flex:none"><h3>Context glosses</h3><p class="small">Tapping an underlined word shows it in an easier sentence and points at the clue nearby. It costs no HP.</p></div>
+</div>
+</div>
+<p class="lede">The reading text is never set in the pixel font. Legibility is the point of the game.</p>
+</section>
+<section id="gbl" data-transition="fade">
+<div class="head">
+<p class="eyebrow">GAME-BASED LEARNING</p>
+<h2>The reading is the attack</h2>
+</div>
+<div class="row">
+<img class="shot" src="assets/result.jpg" alt="The result screen: each card with how it was found, and one line from Kapi about the player's reading" style="width:960px; height:540px">
+<div class="col" style="gap:26px">
+<div class="col tight" style="flex:none"><h3>One action, not two</h3><p class="small">Damage comes only from the correct line, so the fun part and the learning part are the same move.</p></div>
+<div class="col tight" style="flex:none"><h3>Feedback that teaches</h3><p class="small">The result screen shows how each card was found and names one reading habit to keep or change.</p></div>
+<div class="col tight" style="flex:none"><h3>No score, timer or coins</h3><p class="small">The reward is the Evidence book filling with the facts of the mystery.</p></div>
+</div>
+</div>
+<p class="lede">We rejected coins and a shop (they reward winning, not reading) and XP levels (no link to what was read).</p>
+</section>
+<section id="guess" data-transition="fade" style="padding:104px 128px 150px">
+<div class="head">
+<p class="eyebrow">EVIDENCE · GUESS-ONLY RUNS</p>
+<h2>What happens to a player who never reads</h2>
+</div>
+<div class="row">
+<div style="display:grid; grid-template-columns:repeat(2, 1fr); gap:36px 40px; width:760px">
+<div class="stat"><p class="fig">24</p><p class="small">chapter runs with every choice made at random</p></div>
+<div class="stat"><p class="fig">4</p><p class="small">Campfire visits per chapter, median (range 2 to 7)</p></div>
+<div class="stat"><p class="fig">111</p><p class="small">of 144 cards came out bronze, at half damage</p></div>
+<div class="stat"><p class="fig">3</p><p class="small">of 144 cards were right on the first try</p></div>
+</div>
+<div class="col" style="gap:16px">
+<img class="shot" src="assets/guess-result.jpg" alt="Result screen of a random run: all six cards bronze, each marked with the number of hints it took" style="width:856px; height:482px">
+<p class="note">A random run’s result screen: six bronze cards, each marked “after 3 to 5 hints”.</p>
+</div>
+</div>
+<p class="small">Every run still finished its chapter. The third hint lets a struggling reader through, so it lets a guesser through too. The game does not hide it: the result screen says so on every card.</p>
+<p class="note" style="position:absolute; left:128px; bottom:64px; width:1664px">Scripted bot choosing random documents, lines and stamps; 8 runs per chapter; 22 Nov 2026. Not a human playtest.</p>
+</section>
+<section id="changes" data-transition="fade">
+<div class="head">
+<p class="eyebrow">ITERATION</p>
+<h2>What changed after feedback</h2>
+</div>
+<div class="row" style="align-items:flex-end">
+<div class="col" style="flex:none; gap:12px; width:560px">
+<img class="shot" src="assets/before.jpg" alt="The earlier build: text top left, fight top right, three wide cards along the bottom" style="width:786px;height:456px;flex:0 0 auto;box-sizing:border-box">
+<p class="note">&nbsp;cards along the bottom, a long hint in every bubble</p>
+</div>
+<div class="col" style="flex:none; gap:12px; width:880px">
+<img class="shot" src="assets/L-bronze.jpg" alt="The current build: text on the left, fight and a vertical hand of cards on the right" style="width:839px;height:459px;flex:0 0 auto;transform:translate(204px, 0);box-sizing:border-box">
+<p class="note" style="transform:translate(211px, 0)">text left, fight and hand stacked on the right</p>
+</div>
+</div>
+<div style="display:grid; grid-template-columns:repeat(4, 1fr); gap:32px">
+<p class="small"><b>Layout.</b> Only the card in play is open, so a boss hand fits without scrolling.</p>
+<p class="small"><b>Wording.</b> About 120 lines of Kapi’s speech cut down to one idea per bubble.</p>
+<p class="small"><b>Naming.</b> “ม็อบ” reads as a protest crowd in Thai, so enemies became “ภูต”.</p>
+
+</div>
+</section>
+<section id="limits" data-transition="fade">
+<div class="head">
+<p class="eyebrow">HONEST LIMITS</p>
+<h2>What the game does not do yet</h2>
+</div>
+<div style="display:grid; grid-template-columns:repeat(2, 1fr); gap:32px; flex:1">
+<div class="panel"><h3>A guesser can still finish</h3><p class="small">By using up the hint ladder, on bronze cards. We kept that path because it is the same one that lets a struggling reader finish. The play log shows it plainly.</p></div>
+<div class="panel"><h3>Laptop only</h3><p class="small">Drag and drop on a wide screen, with the text and the fight side by side. Phones are not supported, so every tester needs a laptop.</p></div>
+<div class="panel"><h3>Thai wording is still under review</h3><p class="small">The site went live before the team’s final check of the texts, hints and glosses. Invented place and office names also need a native read.</p></div>
+<div class="panel"><h3>A small sample</h3><p class="small">Early playtests and a scripted bot. Enough to find usability problems, not enough to claim learning gains.</p></div>
+</div>
+</section>
+<section id="credits" data-transition="fade">
+<div class="head">
+<p class="eyebrow">CREDITS</p>
+<h2>What we built on</h2>
+</div>
+<table>
+<tr><th style="width:36%">Used for</th><th style="width:42%">Source</th><th>Licence</th></tr>
+<tr><td>Ghosts, bosses, effects, icons, frames, sound and music</td><td>Ninja Adventure asset pack, by Pixel-Boy and AAA</td><td>CC0</td></tr>
+<tr><td>Kapi’s sprite</td><td>Capybara Sprite Sheet, by Rainloaf</td><td>CC0</td></tr>
+<tr><td>Backdrops, Kapi’s portrait, boss intro art</td><td>AI-generated from the team’s own prompts</td><td>Kling / Higgsfield</td></tr>
+<tr><td>Typefaces</td><td>Sarabun, Chonburi and Mali, from Google Fonts</td><td>Open Font License</td></tr>
+<tr><td>Code</td><td>Plain HTML, CSS and JavaScript, developed by Sila Ngamsangiam, hosted on Vercel</td><td></td></tr>
+</table>
+<div class="spacer"></div>
+<p class="note">Reading framework: OECD, PISA 2018 Reading Framework.</p>
+</section>
+<section id="close" class="full">
+<img class="bleed" src="assets/bg-map.webp" alt="The canal town at night, lanterns strung between the market, the village and the town square">
+<div class="scrim"></div>
+<p class="eyebrow">QUESTIONS</p>
+<h1 style="font-size:120px; width:1200px">Read before you believe</h1>
+<p class="sub" style="font-size:48px">อ่านก่อนเชื่อ</p>
+<p class="url" style="margin-top:32px">kapibarian.vercel.app</p>
+</section>
+</div><a id="back" href="/#work">&larr; GunnyTrader</a><div id="hint">Click, swipe or use &larr; &rarr; to move through the deck</div><div id="n"></div><script>const S=[...document.querySelectorAll('#stage>section')],st=document.getElementById('stage'),n=document.getElementById('n');let i=Math.max(0,Math.min(S.length-1,(parseInt(location.hash.slice(1))||1)-1));
+function fit(){const k=Math.min(innerWidth/1920,innerHeight/1080);st.style.transform='scale('+k+') translate(-50%,-50%)';}
+function go(j){i=Math.max(0,Math.min(S.length-1,j));S.forEach((s,x)=>{s.classList.toggle('on',x===i);if(x!==i)s.querySelectorAll('video').forEach(v=>v.pause());});n.textContent=(i+1)+' / '+S.length;history.replaceState(null,'','#'+(i+1));}
+addEventListener('resize',fit);fit();go(i);
+addEventListener('keydown',e=>{const v=S[i].querySelector('video');
+if(['ArrowRight','PageDown','Enter'].includes(e.key)||(e.key===' '&&!v))go(i+1);
+else if(['ArrowLeft','PageUp','Backspace'].includes(e.key))go(i-1);
+else if(e.key===' '&&v){e.preventDefault();v.paused?v.play():v.pause();}
+else if(e.key==='Home')go(0);else if(e.key==='End')go(S.length-1);
+else if(e.key==='f'||e.key==='F'){document.fullscreenElement?document.exitFullscreen():document.documentElement.requestFullscreen();}});
+addEventListener('click',e=>{if(e.target.closest('video,a'))return;go(i+(e.clientX<innerWidth*0.25?-1:1));});;let tx=null;addEventListener('touchstart',e=>{tx=e.touches[0].clientX},{passive:true});
+addEventListener('touchend',e=>{if(tx===null)return;const d=e.changedTouches[0].clientX-tx;tx=null;if(Math.abs(d)>40)go(i+(d<0?1:-1));},{passive:true});
+setTimeout(()=>{const h=document.getElementById('hint');if(h)h.style.opacity=0},6000);</script></body></html>
